@@ -1,7 +1,7 @@
-[meowstrap .html](https://github.com/user-attachments/files/29369692/meowstrap.html)
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <meta name="<meta name="google-site-verification" content="BGAg5ChKOCPDuFtNejNE3oIbE9G8uRei_y61Xly5gaI" />" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MeowStrap — Fork a FishStrap </title>
@@ -504,7 +504,7 @@
         <div class="download-card">
             <div class="download-info">
                 <span class="label">⬇  latest release</span>
-                <h2>MeowStrap 4V</h2>
+                <h2>MeowStrap</h2>
                 <span class="sub"> ·</span>
             </div>
             <div class="download-actions">
@@ -519,9 +519,9 @@
 
         <!-- ─── FOOTER ─── -->
         <footer class="footer">
-            <span>© 2026 MeowStrap</span>
+            <span></span>
             <span class="sep">·</span>
-            <span>Open source under <a href="#">MIT License</a></span>
+            <span>Open source <a href="#"></a></span>
             <span class="sep">·</span>
             <a href="https://github.com/MeowStrap/MeowStrap-ROBLOX" target="_blank">GitHub</a>
             <span class="sep">·</span>
