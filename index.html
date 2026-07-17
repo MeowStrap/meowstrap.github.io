@@ -1,6 +1,7 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-<head><meta name="yandex-verification" content="7b7c9ab62fd5b3c9" />
+<head>
+    <meta name="yandex-verification" content="7b7c9ab62fd5b3c9" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MeowStrap – Roblox Mods & Fast Flags</title>
@@ -88,6 +89,57 @@
             align-items: center;
             text-align: center;
             transition: all 0.2s;
+        }
+
+        /* ---------- TOP BAR (auth button) ---------- */
+        .top-bar {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 12px;
+        }
+
+        .auth-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.2px;
+        }
+        .auth-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(245, 87, 108, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(245, 87, 108, 0.15);
+        }
+        .auth-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+        .auth-btn .user-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f5576c, #a855f7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
         }
 
         /* ---------- LOGO ---------- */
@@ -261,6 +313,18 @@
             .logo-wrapper img {
                 width: 100px;
             }
+            .top-bar {
+                margin-bottom: 6px;
+            }
+            .auth-btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            .auth-btn .user-avatar {
+                width: 24px;
+                height: 24px;
+                font-size: 12px;
+            }
         }
 
         @media (max-width: 430px) {
@@ -270,6 +334,227 @@
             .main-card {
                 padding: 24px 16px 20px;
             }
+        }
+
+        /* ---------- MODAL OVERLAY ---------- */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 20px;
+            animation: modalFadeIn 0.3s ease;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96) translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-box {
+            background: rgba(18, 22, 36, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 40px;
+            padding: 40px 36px 36px;
+            max-width: 440px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            background: rgba(255, 255, 255, 0.06);
+            border: none;
+            color: rgba(255, 255, 255, 0.4);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+        }
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+            letter-spacing: -0.02em;
+        }
+        .modal-sub {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 28px;
+        }
+
+        /* tabs */
+        .auth-tabs {
+            display: flex;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 60px;
+            padding: 4px;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .auth-tab {
+            flex: 1;
+            padding: 10px 0;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.4);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .auth-tab.active {
+            background: rgba(245, 87, 108, 0.2);
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(245, 87, 108, 0.15);
+        }
+        .auth-tab:hover:not(.active) {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* form */
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .auth-form .form-group {
+            text-align: left;
+        }
+        .auth-form label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 4px;
+            letter-spacing: 0.2px;
+        }
+        .auth-form input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            transition: all 0.25s ease;
+            outline: none;
+        }
+        .auth-form input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        .auth-form input:focus {
+            border-color: rgba(245, 87, 108, 0.4);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 0 4px rgba(245, 87, 108, 0.06);
+        }
+
+        .auth-form .submit-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 60px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(135deg, #f5576c, #a855f7);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(245, 87, 108, 0.2);
+            margin-top: 4px;
+        }
+        .auth-form .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(245, 87, 108, 0.35);
+        }
+        .auth-form .submit-btn:active {
+            transform: scale(0.97);
+        }
+
+        .auth-form .form-footer {
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: 4px;
+        }
+        .auth-form .form-footer a {
+            color: rgba(245, 87, 108, 0.7);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+        .auth-form .form-footer a:hover {
+            color: #f5576c;
+        }
+
+        /* auth message */
+        .auth-message {
+            text-align: center;
+            font-size: 13px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+        .auth-message.error {
+            display: block;
+            background: rgba(245, 87, 108, 0.12);
+            color: #f5576c;
+            border: 1px solid rgba(245, 87, 108, 0.15);
+        }
+        .auth-message.success {
+            display: block;
+            background: rgba(76, 175, 80, 0.12);
+            color: #81c784;
+            border: 1px solid rgba(76, 175, 80, 0.15);
+        }
+
+        /* logged in state */
+        .auth-btn.logged-in {
+            background: rgba(76, 175, 80, 0.12);
+            border-color: rgba(76, 175, 80, 0.2);
+        }
+        .auth-btn.logged-in:hover {
+            background: rgba(76, 175, 80, 0.2);
+            border-color: rgba(76, 175, 80, 0.3);
         }
     </style>
 </head>
@@ -281,6 +566,14 @@
     <!-- Main card -->
     <div class="main-card">
 
+        <!-- Top bar with auth button -->
+        <div class="top-bar">
+            <button class="auth-btn" id="authToggleBtn" aria-label="Sign in or register">
+                <svg viewBox="0 0 24 24"><path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z"/></svg>
+                <span id="authBtnLabel">Sign In</span>
+            </button>
+        </div>
+
         <!-- Logo -->
         <div class="logo-wrapper">
             <img src="MeowStrap icon.png" alt="MeowStrap" />
@@ -290,14 +583,13 @@
         <div class="brand-title">MeowStrap</div>
         <div class="brand-sub">Roblox Mod Loader · Fast Flags · Open Source</div>
 
-        <!-- Feature grid (froststrap style) -->
+        <!-- Feature grid -->
         <div class="feature-grid">
             <div class="feature-card">
                 <span class="emoji">🧩</span>
                 <h4>Mods</h4>
-                <p> amp;</p>
+                <p>&amp;</p>
             </div>
-           
             <div class="feature-card">
                 <span class="emoji">🌐</span>
                 <h4>Open Source</h4>
@@ -318,8 +610,45 @@
         </div>
     </div>
 
+    <!-- ========== AUTH MODAL ========== -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-box">
+
+            <button class="modal-close" id="modalCloseBtn" aria-label="Close">✕</button>
+
+            <div class="modal-title" id="modalTitle">Welcome Back</div>
+            <div class="modal-sub" id="modalSub">Sign in to your MeowStrap account</div>
+
+            <!-- Tabs -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login" id="tabLogin">Sign In</button>
+                <button class="auth-tab" data-tab="register" id="tabRegister">Register</button>
+            </div>
+
+            <!-- Form -->
+            <form class="auth-form" id="authForm" autocomplete="off">
+                <div class="form-group">
+                    <label for="authEmail">Email or Username</label>
+                    <input type="text" id="authEmail" placeholder="you@example.com" required />
+                </div>
+                <div class="form-group">
+                    <label for="authPassword">Password</label>
+                    <input type="password" id="authPassword" placeholder="••••••••" required />
+                </div>
+                <div class="auth-message" id="authMessage"></div>
+                <button type="submit" class="submit-btn" id="authSubmitBtn">Sign In</button>
+                <div class="form-footer">
+                    <span id="formFooterText">Don't have an account?</span>
+                    <a id="formFooterLink">Register</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
     <script>
         (function() {
+            // ---------- CANVAS (falling icons) ----------
             const canvas = document.getElementById('snowCanvas');
             const ctx = canvas.getContext('2d');
 
@@ -433,6 +762,204 @@
                 resize();
                 createParticles();
             });
+
+            // ---------- AUTH LOGIC ----------
+            const authToggleBtn = document.getElementById('authToggleBtn');
+            const authBtnLabel = document.getElementById('authBtnLabel');
+            const modal = document.getElementById('authModal');
+            const modalCloseBtn = document.getElementById('modalCloseBtn');
+            const tabLogin = document.getElementById('tabLogin');
+            const tabRegister = document.getElementById('tabRegister');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalSub = document.getElementById('modalSub');
+            const authForm = document.getElementById('authForm');
+            const authEmail = document.getElementById('authEmail');
+            const authPassword = document.getElementById('authPassword');
+            const authSubmitBtn = document.getElementById('authSubmitBtn');
+            const authMessage = document.getElementById('authMessage');
+            const formFooterText = document.getElementById('formFooterText');
+            const formFooterLink = document.getElementById('formFooterLink');
+
+            let currentMode = 'login'; // 'login' | 'register'
+            let isLoggedIn = false;
+            let currentUser = null;
+
+            // Simple in-memory "database"
+            const users = {};
+
+            function setMode(mode) {
+                currentMode = mode;
+                if (mode === 'login') {
+                    modalTitle.textContent = 'Welcome Back';
+                    modalSub.textContent = 'Sign in to your MeowStrap account';
+                    authSubmitBtn.textContent = 'Sign In';
+                    formFooterText.textContent = "Don't have an account?";
+                    formFooterLink.textContent = 'Register';
+                    tabLogin.classList.add('active');
+                    tabRegister.classList.remove('active');
+                    authMessage.className = 'auth-message';
+                    authMessage.style.display = 'none';
+                    authMessage.textContent = '';
+                } else {
+                    modalTitle.textContent = 'Create Account';
+                    modalSub.textContent = 'Join the MeowStrap community';
+                    authSubmitBtn.textContent = 'Register';
+                    formFooterText.textContent = 'Already have an account?';
+                    formFooterLink.textContent = 'Sign In';
+                    tabRegister.classList.add('active');
+                    tabLogin.classList.remove('active');
+                    authMessage.className = 'auth-message';
+                    authMessage.style.display = 'none';
+                    authMessage.textContent = '';
+                }
+            }
+
+            function showMessage(text, type) {
+                authMessage.textContent = text;
+                authMessage.className = 'auth-message ' + type;
+                authMessage.style.display = 'block';
+            }
+
+            function hideMessage() {
+                authMessage.className = 'auth-message';
+                authMessage.style.display = 'none';
+                authMessage.textContent = '';
+            }
+
+            function openModal(mode) {
+                hideMessage();
+                setMode(mode || 'login');
+                authEmail.value = '';
+                authPassword.value = '';
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => authEmail.focus(), 100);
+            }
+
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                hideMessage();
+            }
+
+            function updateAuthButton() {
+                if (isLoggedIn && currentUser) {
+                    const initial = currentUser.charAt(0).toUpperCase();
+                    authToggleBtn.innerHTML = `
+                        <span class="user-avatar">${initial}</span>
+                        <span id="authBtnLabel">${currentUser}</span>
+                    `;
+                    authToggleBtn.classList.add('logged-in');
+                } else {
+                    authToggleBtn.innerHTML = `
+                        <svg viewBox="0 0 24 24"><path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z"/></svg>
+                        <span id="authBtnLabel">Sign In</span>
+                    `;
+                    authToggleBtn.classList.remove('logged-in');
+                }
+            }
+
+            function handleAuthSubmit(e) {
+                e.preventDefault();
+                hideMessage();
+
+                const email = authEmail.value.trim();
+                const password = authPassword.value.trim();
+
+                if (!email || !password) {
+                    showMessage('Please fill in all fields.', 'error');
+                    return;
+                }
+
+                if (currentMode === 'login') {
+                    // Login
+                    if (users[email] && users[email].password === password) {
+                        isLoggedIn = true;
+                        currentUser = users[email].username || email;
+                        updateAuthButton();
+                        showMessage('Welcome back, ' + currentUser + '! 🎉', 'success');
+                        setTimeout(() => {
+                            closeModal();
+                        }, 900);
+                    } else if (users[email]) {
+                        showMessage('Incorrect password. Try again.', 'error');
+                    } else {
+                        showMessage('No account found with that email. Please register.', 'error');
+                    }
+                } else {
+                    // Register
+                    if (users[email]) {
+                        showMessage('An account with this email already exists. Please sign in.', 'error');
+                        return;
+                    }
+                    if (password.length < 4) {
+                        showMessage('Password must be at least 4 characters.', 'error');
+                        return;
+                    }
+                    // Extract username from email or use a default
+                    const username = email.split('@')[0] || 'User';
+                    users[email] = { password, username };
+                    isLoggedIn = true;
+                    currentUser = username;
+                    updateAuthButton();
+                    showMessage('Account created! Welcome, ' + username + ' 🎉', 'success');
+                    setTimeout(() => {
+                        closeModal();
+                    }, 1000);
+                }
+            }
+
+            // ---------- EVENT LISTENERS ----------
+            authToggleBtn.addEventListener('click', function(e) {
+                if (isLoggedIn) {
+                    // If logged in, clicking opens modal to manage account or logout
+                    // We'll just open the modal in login mode as a simple approach
+                    openModal('login');
+                } else {
+                    openModal('login');
+                }
+            });
+
+            modalCloseBtn.addEventListener('click', closeModal);
+
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) closeModal();
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+
+            tabLogin.addEventListener('click', function() {
+                setMode('login');
+            });
+
+            tabRegister.addEventListener('click', function() {
+                setMode('register');
+            });
+
+            formFooterLink.addEventListener('click', function() {
+                if (currentMode === 'login') {
+                    setMode('register');
+                } else {
+                    setMode('login');
+                }
+            });
+
+            authForm.addEventListener('submit', handleAuthSubmit);
+
+            // ---------- INIT ----------
+            updateAuthButton();
+
+            // Pre-fill demo account for testing
+            users['demo@meowstrap.com'] = { password: 'demo123', username: 'DemoUser' };
+            users['test@meowstrap.com'] = { password: 'test123', username: 'TestUser' };
+
+            console.log('🔐 MeowStrap Auth ready!');
+            console.log('📝 Demo accounts: demo@meowstrap.com / demo123  |  test@meowstrap.com / test123');
+
         })();
     </script>
 
