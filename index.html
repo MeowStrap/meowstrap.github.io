@@ -402,6 +402,14 @@
             transform: rotate(90deg);
         }
 
+        /* ----- Auth form (logged out) ----- */
+        .auth-view {
+            display: block;
+        }
+        .auth-view.hidden {
+            display: none;
+        }
+
         .modal-title {
             font-size: 26px;
             font-weight: 700;
@@ -415,7 +423,6 @@
             margin-bottom: 28px;
         }
 
-        /* tabs */
         .auth-tabs {
             display: flex;
             gap: 4px;
@@ -447,7 +454,6 @@
             color: rgba(255, 255, 255, 0.7);
         }
 
-        /* form */
         .auth-form {
             display: flex;
             flex-direction: column;
@@ -525,7 +531,6 @@
             color: #f5576c;
         }
 
-        /* auth message */
         .auth-message {
             text-align: center;
             font-size: 13px;
@@ -547,7 +552,83 @@
             border: 1px solid rgba(76, 175, 80, 0.15);
         }
 
-        /* logged in state */
+        /* ----- Account view (logged in) ----- */
+        .account-view {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .account-view.visible {
+            display: flex;
+        }
+
+        .account-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f5576c, #a855f7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 auto 14px;
+            box-shadow: 0 8px 32px rgba(245, 87, 108, 0.2);
+        }
+
+        .account-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+        .account-email {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 24px;
+            word-break: break-all;
+        }
+
+        .logout-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 36px;
+            border: none;
+            border-radius: 60px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            background: rgba(245, 87, 108, 0.15);
+            border: 1px solid rgba(245, 87, 108, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .logout-btn:hover {
+            background: rgba(245, 87, 108, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(245, 87, 108, 0.15);
+        }
+        .logout-btn:active {
+            transform: scale(0.97);
+        }
+        .logout-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .account-session-info {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.2);
+            margin-top: 16px;
+            letter-spacing: 0.2px;
+        }
+
+        /* ---------- LOGGED IN STATE (auth button) ---------- */
         .auth-btn.logged-in {
             background: rgba(76, 175, 80, 0.12);
             border-color: rgba(76, 175, 80, 0.2);
@@ -616,32 +697,52 @@
 
             <button class="modal-close" id="modalCloseBtn" aria-label="Close">✕</button>
 
-            <div class="modal-title" id="modalTitle">Welcome Back</div>
-            <div class="modal-sub" id="modalSub">Sign in to your MeowStrap account</div>
+            <!-- ---- VIEW: NOT LOGGED IN (auth form) ---- -->
+            <div class="auth-view" id="authView">
+                <div class="modal-title" id="modalTitle">Welcome Back</div>
+                <div class="modal-sub" id="modalSub">Sign in to your MeowStrap account</div>
 
-            <!-- Tabs -->
-            <div class="auth-tabs">
-                <button class="auth-tab active" data-tab="login" id="tabLogin">Sign In</button>
-                <button class="auth-tab" data-tab="register" id="tabRegister">Register</button>
+                <!-- Tabs -->
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login" id="tabLogin">Sign In</button>
+                    <button class="auth-tab" data-tab="register" id="tabRegister">Register</button>
+                </div>
+
+                <!-- Form -->
+                <form class="auth-form" id="authForm" autocomplete="off">
+                    <div class="form-group">
+                        <label for="authEmail">Email or Username</label>
+                        <input type="text" id="authEmail" placeholder="you@example.com" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="authPassword">Password</label>
+                        <input type="password" id="authPassword" placeholder="••••••••" required />
+                    </div>
+                    <div class="auth-message" id="authMessage"></div>
+                    <button type="submit" class="submit-btn" id="authSubmitBtn">Sign In</button>
+                    <div class="form-footer">
+                        <span id="formFooterText">Don't have an account?</span>
+                        <a id="formFooterLink">Register</a>
+                    </div>
+                </form>
             </div>
 
-            <!-- Form -->
-            <form class="auth-form" id="authForm" autocomplete="off">
-                <div class="form-group">
-                    <label for="authEmail">Email or Username</label>
-                    <input type="text" id="authEmail" placeholder="you@example.com" required />
-                </div>
-                <div class="form-group">
-                    <label for="authPassword">Password</label>
-                    <input type="password" id="authPassword" placeholder="••••••••" required />
-                </div>
-                <div class="auth-message" id="authMessage"></div>
-                <button type="submit" class="submit-btn" id="authSubmitBtn">Sign In</button>
-                <div class="form-footer">
-                    <span id="formFooterText">Don't have an account?</span>
-                    <a id="formFooterLink">Register</a>
-                </div>
-            </form>
+            <!-- ---- VIEW: LOGGED IN (account info) ---- -->
+            <div class="account-view" id="accountView">
+                <div class="modal-title">Your Account</div>
+                <div class="modal-sub">Manage your MeowStrap profile</div>
+
+                <div class="account-avatar" id="accountAvatar">U</div>
+                <div class="account-name" id="accountName">User</div>
+                <div class="account-email" id="accountEmail">user@example.com</div>
+
+                <button class="logout-btn" id="logoutBtn">
+                    <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+                    Logout
+                </button>
+
+                <div class="account-session-info">✓ Session saved</div>
+            </div>
 
         </div>
     </div>
@@ -763,7 +864,9 @@
                 createParticles();
             });
 
-            // ---------- AUTH LOGIC ----------
+            // ---------- AUTH LOGIC with localStorage persistence ----------
+            const STORAGE_KEY = 'meowstrap_user';
+
             const authToggleBtn = document.getElementById('authToggleBtn');
             const authBtnLabel = document.getElementById('authBtnLabel');
             const modal = document.getElementById('authModal');
@@ -780,13 +883,91 @@
             const formFooterText = document.getElementById('formFooterText');
             const formFooterLink = document.getElementById('formFooterLink');
 
+            // Logged-in view elements
+            const authView = document.getElementById('authView');
+            const accountView = document.getElementById('accountView');
+            const accountAvatar = document.getElementById('accountAvatar');
+            const accountName = document.getElementById('accountName');
+            const accountEmail = document.getElementById('accountEmail');
+            const logoutBtn = document.getElementById('logoutBtn');
+
             let currentMode = 'login'; // 'login' | 'register'
             let isLoggedIn = false;
-            let currentUser = null;
+            let currentUser = null; // { email, username }
+            let currentEmail = '';
 
             // Simple in-memory "database"
             const users = {};
 
+            // ---------- SESSION PERSISTENCE ----------
+            function saveSession(user) {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+                } catch (e) {
+                    console.warn('Could not save session:', e);
+                }
+            }
+
+            function loadSession() {
+                try {
+                    const raw = localStorage.getItem(STORAGE_KEY);
+                    if (!raw) return null;
+                    return JSON.parse(raw);
+                } catch (e) {
+                    console.warn('Could not load session:', e);
+                    return null;
+                }
+            }
+
+            function clearSession() {
+                try {
+                    localStorage.removeItem(STORAGE_KEY);
+                } catch (e) {
+                    console.warn('Could not clear session:', e);
+                }
+            }
+
+            // ---------- RENDER MODAL VIEW ----------
+            function renderModalView() {
+                if (isLoggedIn && currentUser) {
+                    // Show account view
+                    authView.classList.add('hidden');
+                    authView.style.display = 'none';
+                    accountView.classList.add('visible');
+                    accountView.style.display = 'flex';
+
+                    const initial = (currentUser.username || 'U').charAt(0).toUpperCase();
+                    accountAvatar.textContent = initial;
+                    accountName.textContent = currentUser.username || 'User';
+                    accountEmail.textContent = currentUser.email || 'user@example.com';
+                } else {
+                    // Show auth form
+                    authView.classList.remove('hidden');
+                    authView.style.display = 'block';
+                    accountView.classList.remove('visible');
+                    accountView.style.display = 'none';
+                }
+            }
+
+            // ---------- UPDATE AUTH BUTTON ----------
+            function updateAuthButton() {
+                if (isLoggedIn && currentUser) {
+                    const initial = (currentUser.username || 'U').charAt(0).toUpperCase();
+                    authToggleBtn.innerHTML = `
+                        <span class="user-avatar">${initial}</span>
+                        <span id="authBtnLabel">${currentUser.username || 'User'}</span>
+                    `;
+                    authToggleBtn.classList.add('logged-in');
+                } else {
+                    authToggleBtn.innerHTML = `
+                        <svg viewBox="0 0 24 24"><path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z"/></svg>
+                        <span id="authBtnLabel">Sign In</span>
+                    `;
+                    authToggleBtn.classList.remove('logged-in');
+                }
+            }
+
+            // ---------- SET AUTH MODE (login/register) ----------
             function setMode(mode) {
                 currentMode = mode;
                 if (mode === 'login') {
@@ -797,9 +978,6 @@
                     formFooterLink.textContent = 'Register';
                     tabLogin.classList.add('active');
                     tabRegister.classList.remove('active');
-                    authMessage.className = 'auth-message';
-                    authMessage.style.display = 'none';
-                    authMessage.textContent = '';
                 } else {
                     modalTitle.textContent = 'Create Account';
                     modalSub.textContent = 'Join the MeowStrap community';
@@ -808,10 +986,8 @@
                     formFooterLink.textContent = 'Sign In';
                     tabRegister.classList.add('active');
                     tabLogin.classList.remove('active');
-                    authMessage.className = 'auth-message';
-                    authMessage.style.display = 'none';
-                    authMessage.textContent = '';
                 }
+                hideMessage();
             }
 
             function showMessage(text, type) {
@@ -826,14 +1002,23 @@
                 authMessage.textContent = '';
             }
 
+            // ---------- OPEN / CLOSE MODAL ----------
             function openModal(mode) {
                 hideMessage();
-                setMode(mode || 'login');
-                authEmail.value = '';
-                authPassword.value = '';
+                if (isLoggedIn && currentUser) {
+                    // If already logged in, show account view
+                    renderModalView();
+                } else {
+                    setMode(mode || 'login');
+                    authEmail.value = '';
+                    authPassword.value = '';
+                    renderModalView();
+                }
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
-                setTimeout(() => authEmail.focus(), 100);
+                if (!isLoggedIn) {
+                    setTimeout(() => authEmail.focus(), 100);
+                }
             }
 
             function closeModal() {
@@ -842,23 +1027,7 @@
                 hideMessage();
             }
 
-            function updateAuthButton() {
-                if (isLoggedIn && currentUser) {
-                    const initial = currentUser.charAt(0).toUpperCase();
-                    authToggleBtn.innerHTML = `
-                        <span class="user-avatar">${initial}</span>
-                        <span id="authBtnLabel">${currentUser}</span>
-                    `;
-                    authToggleBtn.classList.add('logged-in');
-                } else {
-                    authToggleBtn.innerHTML = `
-                        <svg viewBox="0 0 24 24"><path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z"/></svg>
-                        <span id="authBtnLabel">Sign In</span>
-                    `;
-                    authToggleBtn.classList.remove('logged-in');
-                }
-            }
-
+            // ---------- LOGIN / REGISTER HANDLING ----------
             function handleAuthSubmit(e) {
                 e.preventDefault();
                 hideMessage();
@@ -874,10 +1043,17 @@
                 if (currentMode === 'login') {
                     // Login
                     if (users[email] && users[email].password === password) {
+                        const userData = {
+                            email: email,
+                            username: users[email].username || email.split('@')[0] || 'User'
+                        };
+                        currentUser = userData;
+                        currentEmail = email;
                         isLoggedIn = true;
-                        currentUser = users[email].username || email;
+                        saveSession(userData);
                         updateAuthButton();
-                        showMessage('Welcome back, ' + currentUser + '! 🎉', 'success');
+                        renderModalView();
+                        showMessage('Welcome back, ' + currentUser.username + '! 🎉', 'success');
                         setTimeout(() => {
                             closeModal();
                         }, 900);
@@ -896,12 +1072,15 @@
                         showMessage('Password must be at least 4 characters.', 'error');
                         return;
                     }
-                    // Extract username from email or use a default
                     const username = email.split('@')[0] || 'User';
                     users[email] = { password, username };
+                    const userData = { email, username };
+                    currentUser = userData;
+                    currentEmail = email;
                     isLoggedIn = true;
-                    currentUser = username;
+                    saveSession(userData);
                     updateAuthButton();
+                    renderModalView();
                     showMessage('Account created! Welcome, ' + username + ' 🎉', 'success');
                     setTimeout(() => {
                         closeModal();
@@ -909,15 +1088,51 @@
                 }
             }
 
+            // ---------- LOGOUT ----------
+            function handleLogout() {
+                isLoggedIn = false;
+                currentUser = null;
+                currentEmail = '';
+                clearSession();
+                updateAuthButton();
+                renderModalView();
+                closeModal();
+                // Show a quick feedback on the main page? We'll just close the modal.
+            }
+
+            // ---------- RESTORE SESSION ON LOAD ----------
+            function restoreSession() {
+                const saved = loadSession();
+                if (saved && saved.email) {
+                    // Check if user still exists in our "DB" (or just trust the session)
+                    // We'll also make sure the password is there, but we don't store passwords in session.
+                    // If the user exists in our in-memory DB, restore. Otherwise, create a placeholder.
+                    if (users[saved.email]) {
+                        currentUser = {
+                            email: saved.email,
+                            username: users[saved.email].username || saved.username || saved.email.split('@')[0] || 'User'
+                        };
+                        currentEmail = saved.email;
+                        isLoggedIn = true;
+                    } else {
+                        // User was deleted from memory but session exists — recreate a minimal entry
+                        const username = saved.username || saved.email.split('@')[0] || 'User';
+                        // We don't know the password, but we'll allow the session to work.
+                        // The user can still use the account, but password is unknown.
+                        // We'll store a placeholder password (won't be used for login since we check users[email])
+                        users[saved.email] = { password: '___session_restored___', username };
+                        currentUser = { email: saved.email, username };
+                        currentEmail = saved.email;
+                        isLoggedIn = true;
+                    }
+                    updateAuthButton();
+                    renderModalView();
+                }
+            }
+
             // ---------- EVENT LISTENERS ----------
             authToggleBtn.addEventListener('click', function(e) {
-                if (isLoggedIn) {
-                    // If logged in, clicking opens modal to manage account or logout
-                    // We'll just open the modal in login mode as a simple approach
-                    openModal('login');
-                } else {
-                    openModal('login');
-                }
+                openModal(isLoggedIn ? null : 'login');
             });
 
             modalCloseBtn.addEventListener('click', closeModal);
@@ -933,32 +1148,42 @@
             });
 
             tabLogin.addEventListener('click', function() {
-                setMode('login');
+                if (!isLoggedIn) setMode('login');
             });
 
             tabRegister.addEventListener('click', function() {
-                setMode('register');
+                if (!isLoggedIn) setMode('register');
             });
 
             formFooterLink.addEventListener('click', function() {
-                if (currentMode === 'login') {
-                    setMode('register');
-                } else {
-                    setMode('login');
+                if (!isLoggedIn) {
+                    if (currentMode === 'login') setMode('register');
+                    else setMode('login');
                 }
             });
 
             authForm.addEventListener('submit', handleAuthSubmit);
 
-            // ---------- INIT ----------
-            updateAuthButton();
+            logoutBtn.addEventListener('click', handleLogout);
 
-            // Pre-fill demo account for testing
+            // ---------- PRE-FILL DEMO ACCOUNTS ----------
             users['demo@meowstrap.com'] = { password: 'demo123', username: 'DemoUser' };
             users['test@meowstrap.com'] = { password: 'test123', username: 'TestUser' };
 
+            // ---------- INIT ----------
+            restoreSession();
+            // If not logged in after restore, ensure auth view is shown
+            if (!isLoggedIn) {
+                renderModalView();
+                setMode('login');
+            } else {
+                renderModalView();
+            }
+            updateAuthButton();
+
             console.log('🔐 MeowStrap Auth ready!');
             console.log('📝 Demo accounts: demo@meowstrap.com / demo123  |  test@meowstrap.com / test123');
+            console.log('💾 Sessions are saved in localStorage (key: meowstrap_user)');
 
         })();
     </script>
